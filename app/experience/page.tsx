@@ -1,58 +1,88 @@
+'use client'
 import React from 'react'
+import { motion } from 'framer-motion'
+import PageTransition from '../../components/PageTransition'
+
+// ✅ Experience data (easy to edit later)
+const experiences = [
+  {
+    company: 'CMA CGM Iberica',
+    title: 'Documentation Specialist',
+    period: '2022 – 2024',
+    details: [
+      'Managed export documentation processes, ensuring accuracy, compliance, and timely delivery.',
+      'Acted as liaison between outsourced teams in India and local operations to improve workflows.',
+      'Analyzed KPIs and operational performance to drive process improvements.',
+      'Collaborated with global stakeholders to ensure quality and reliability.',
+    ],
+  },
+  {
+    company: 'Containerships – CMA CGM Group',
+    title: 'Transportation Specialist',
+    period: '2019 – 2022',
+    details: [
+      'Oversaw land and rail transport operations and vendor coordination across Spain.',
+      'Led cost optimization initiatives and built KPI reporting dashboards.',
+      'Improved communication channels between operations, customer service, and finance.',
+    ],
+  },
+  {
+    company: 'Across Logistics SL',
+    title: 'Operations Specialist',
+    period: '2017 – 2019',
+    details: [
+      'Coordinated sea, air, and road shipments end-to-end.',
+      'Managed customs documentation and regulatory compliance.',
+      'Maintained strong relationships with carriers and international agents.',
+    ],
+  },
+]
 
 export default function Experience() {
-  const experiences = [
-    {
-      company: 'CMA CGM Iberica',
-      title: 'Documentation Specialist',
-      period: '2022 – 2024',
-      details: [
-        'Managed export documentation processes, ensuring accuracy, compliance, and timely delivery.',
-        'Acted as liaison between the outsourced team in India and local operations to drive process improvements.',
-        'Analyzed KPIs and performance data to streamline workflows and enhance efficiency.',
-      ],
-    },
-    {
-      company: 'Containerships – CMA CGM Group',
-      title: 'Transportation Specialist',
-      period: '2019 – 2022',
-      details: [
-        'Oversaw land and rail transport operations, vendor coordination, and stock management in Spain.',
-        'Led cost optimization projects and implemented KPI reporting tools to improve visibility and control.',
-      ],
-    },
-    {
-      company: 'Across Logistics SL',
-      title: 'Operations Specialist',
-      period: '2017 – 2019',
-      details: [
-        'Coordinated end-to-end import/export shipments (Sea, Air, Road) and managed customs documentation.',
-        'Maintained relationships with agents and carriers to ensure seamless logistics execution.',
-      ],
-    },
-  ]
-
   return (
-    <section className="mt-8">
-      <h2 className="text-2xl font-semibold mb-4">Experience</h2>
-      <div className="space-y-4">
-        {experiences.map((exp, index) => (
-          <article key={index} className="card">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-semibold">{exp.title}</h3>
-                <p className="text-sm text-gray-300">{exp.company}</p>
-              </div>
-              <time className="text-sm text-gray-400">{exp.period}</time>
-            </div>
-            <ul className="mt-3 list-disc ml-6 text-sm text-gray-300">
-              {exp.details.map((detail, i) => (
-                <li key={i}>{detail}</li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
-    </section>
+    <PageTransition>
+      <section className="py-20 max-w-4xl mx-auto">
+
+        {/* ✅ Page Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl font-bold mb-12 text-center"
+        >
+          Experience
+        </motion.h1>
+
+        {/* ✅ Vertical Timeline */}
+        <div className="relative border-l border-white/10 pl-6 space-y-12">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              {/* ✅ Timeline Dot */}
+              <div className="w-3 h-3 bg-accent rounded-full absolute -left-[1.65rem] top-2 shadow-lg shadow-cyan-500/30" />
+
+              {/* ✅ Title + Company */}
+              <h3 className="text-xl font-semibold text-white">{exp.title}</h3>
+              <p className="text-accent text-sm font-medium">{exp.company}</p>
+              <p className="text-gray-400 text-sm mb-4">{exp.period}</p>
+
+              {/* ✅ Bullet Points */}
+              <ul className="list-disc ml-6 text-gray-300 space-y-2 text-sm leading-relaxed">
+                {exp.details.map((detail, i) => (
+                  <li key={i}>{detail}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+      </section>
+    </PageTransition>
   )
 }
