@@ -8,7 +8,6 @@
 :root {
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
-
   --accent: #facc15; /* yellow accent */
 }
 
@@ -21,11 +20,23 @@ html, body {
   color: #e6eef8;
   line-height: 1.7;
   font-family: var(--font-body);
+  overflow-x: hidden; /* no sideways scroll jitter on mobile */
 }
 
-body {
-  position: relative;
+body { position: relative; }
+
+/* iOS safe-area padding helper (used in mobile header) */
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+  padding-top: constant(safe-area-inset-top);
 }
+
+/* Hide scrollbars on the mobile header row */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 /* -------------------------------------------------
    BACKGROUND IMAGE + OVERLAY
@@ -37,7 +48,6 @@ body::before {
   background: url("/images/hero-bg.png") center / cover no-repeat;
   z-index: -2;
 }
-
 body::after {
   content: "";
   position: fixed;
@@ -54,9 +64,11 @@ h1, h2, h3, h4 {
   color: #fff;
   font-weight: 600;
 }
+p, li, span, a, button { font-family: var(--font-body); }
 
-p, li, span, a, button {
-  font-family: var(--font-body);
+/* On small screens, NEVER force huge headings to stay on one line */
+@media (max-width: 640px) {
+  h1 { white-space: normal !important; word-break: break-word; }
 }
 
 /* -------------------------------------------------
@@ -67,7 +79,6 @@ p, li, span, a, button {
   margin: 0 auto;
   padding: 2rem;
 }
-
 .card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.04);
@@ -76,20 +87,13 @@ p, li, span, a, button {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
 }
-.card:hover {
-  transform: scale(1.01);
-}
+.card:hover { transform: scale(1.01); }
 
 /* -------------------------------------------------
    LINKS
 -------------------------------------------------- */
-a {
-  color: var(--accent);
-  transition: color 0.2s ease;
-}
-a:hover {
-  color: #ffe066;
-}
+a { color: var(--accent); transition: color 0.2s ease; }
+a:hover { color: #ffe066; }
 
 /* -------------------------------------------------
    BUTTONS
@@ -102,10 +106,7 @@ button, .button {
   background: rgba(255,255,255,0.04);
   color: white;
 }
-button:hover, .button:hover {
-  background: var(--accent);
-  color: black;
-}
+button:hover, .button:hover { background: var(--accent); color: black; }
 
 /* -------------------------------------------------
    HERO — TECH GRID OVERLAY
@@ -115,17 +116,14 @@ button:hover, .button:hover {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-
   background-image:
     linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
   background-size: 48px 48px;
-
   mask-image: radial-gradient(circle at 40% 40%, rgba(0,0,0,1), rgba(0,0,0,0.08) 65%, transparent 85%);
   animation: gridDrift 40s linear infinite;
   opacity: 0.2;
 }
-
 @keyframes gridDrift {
   0%   { transform: translate3d(0,0,0) scale(1); }
   50%  { transform: translate3d(-12px, -8px, 0) scale(1.02); }
@@ -139,17 +137,11 @@ button:hover, .button:hover {
   position: absolute;
   width: 480px;
   height: 480px;
-
-  background: radial-gradient(circle,
-    rgba(250,204,21,0.20),
-    rgba(250,204,21,0.0) 70%
-  );
-
+  background: radial-gradient(circle, rgba(250,204,21,0.20), rgba(250,204,21,0.0) 70%);
   filter: blur(60px);
   z-index: 0;
   animation: glowPulse 16s ease-in-out infinite;
 }
-
 @keyframes glowPulse {
   0%,100% { transform: scale(1); opacity: 0.75; }
   50%     { transform: scale(1.06); opacity: 1; }
@@ -159,38 +151,29 @@ button:hover, .button:hover {
    PARTICLES — GLOBAL
 -------------------------------------------------- */
 .particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1;
 }
-
 .particles span {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #facc15;
-  border-radius: 50%;
-  opacity: 0.35;
-
-  animation: floatUp 8s linear infinite;
+  position: absolute; width: 4px; height: 4px; background: #facc15; border-radius: 50%;
+  opacity: 0.35; animation: floatUp 8s linear infinite;
 }
-
 @keyframes floatUp {
-  from { transform: translateY(20px) scale(1); opacity: 0.35; }
-  to   { transform: translateY(-100vh) scale(0.4); opacity: 0; }
+  from { transform: translateY(20px) scale(1); opacity: .35; }
+  to   { transform: translateY(-100vh) scale(.4); opacity: 0; }
 }
 
 /* -------------------------------------------------
    RIGHT-SIDE ACCENT MASK
 -------------------------------------------------- */
-.hero-accent-mask {
-  mask-image: radial-gradient(90% 90% at 70% 50%, #000 40%, transparent 100%);
-}
+.hero-accent-mask { mask-image: radial-gradient(90% 90% at 70% 50%, #000 40%, transparent 100%); }
 
 /* -------------------------------------------------
    CLEAN UTILITIES
 -------------------------------------------------- */
 .text-accent { color: var(--accent); }
 .bg-accent { background-color: var(--accent); }
+
+/* Give page sections a little breathing room under the fixed desktop header */
+@media (min-width: 768px) {
+  .page-section { scroll-margin-top: 96px; }
+}

@@ -1,9 +1,8 @@
-'use client'
-import React from 'react'
-import { motion } from 'framer-motion'
-import PageTransition from '../../components/PageTransition'
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import PageTransition from "../../components/PageTransition";
 
-// ✅ Skills data (languages removed)
 const skills = {
   logistics: [
     "Logistics Operations",
@@ -32,21 +31,19 @@ const skills = {
     "Decision Making",
     "Adaptability",
   ],
-}
+};
 
-// ✅ Skill groups (languages removed)
 const skillGroups = [
   { title: "Logistics & Operations", items: skills.logistics },
   { title: "Data & Analytical Tools", items: skills.analytics },
   { title: "Soft Skills", items: skills.soft },
-]
+];
 
 export default function Skills() {
   return (
     <PageTransition>
-      <section className="py-20 max-w-5xl mx-auto">
+      <section className="py-20 max-w-5xl mx-auto px-4">
 
-        {/* ✅ Page Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,32 +53,29 @@ export default function Skills() {
           Skills
         </motion.h1>
 
-        {/* ✅ Grid of Skill Cards */}
         <div className="grid md:grid-cols-2 gap-10">
           {skillGroups.map((group, idx) => (
-            <SkillCard 
-              key={idx} 
-              title={group.title} 
-              items={group.items} 
+            <SkillCard
+              key={idx}
+              title={group.title}
+              items={group.items}
               delay={idx * 0.12}
             />
           ))}
         </div>
-
       </section>
     </PageTransition>
-  )
+  );
 }
 
-/* ✅ Reusable Skill Card Component */
 function SkillCard({
   title,
   items,
   delay,
 }: {
-  title: string
-  items: string[]
-  delay: number
+  title: string;
+  items: string[];
+  delay: number;
 }) {
   return (
     <motion.div
@@ -89,22 +83,41 @@ function SkillCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      className="card p-6 border border-white/10 shadow-lg hover:border-accent/40 transition-all duration-300"
+      className="
+        card 
+        p-6 
+        border border-white/10 
+        shadow-lg 
+        hover:border-accent/40 
+        transition-all 
+        rounded-xl
+      "
     >
       <h3 className="text-xl font-semibold text-white mb-4">{title}</h3>
 
-      <ul className="space-y-2">
+      <ul className="space-y-2 max-w-full break-words">
         {items.map((skill, idx) => (
           <motion.li
             key={idx}
             whileHover={{ x: 6 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 12 }}
-            className="bg-white/5 border border-white/10 px-3 py-2 rounded-md text-gray-300 text-sm hover:bg-white/10 transition-all"
+            transition={{ type: "spring", stiffness: 200, damping: 12 }}
+            className="
+              bg-white/5 
+              border border-white/10 
+              px-3 py-2 
+              rounded-md 
+              text-gray-300 
+              text-base 
+              md:text-sm
+              hover:bg-white/10 
+              transition-all 
+              break-words
+            "
           >
             {skill}
           </motion.li>
         ))}
       </ul>
     </motion.div>
-  )
+  );
 }

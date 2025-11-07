@@ -1,6 +1,6 @@
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[2].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[14].oneOf[2].use[2]!./node_modules/next/font/google/target.css?{"path":"app/layout.tsx","import":"Space_Grotesk","arguments":[{"subsets":["latin"],"weight":["300","400","500","600","700"],"display":"swap"}],"variableName":"spaceGrotesk"} ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[2].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[14].oneOf[2].use[2]!./node_modules/next/font/google/target.css?{"path":"app/layout.tsx","import":"Space_Grotesk","arguments":[{"subsets":["latin"],"weight":["300","400","500","600","700"],"variable":"--font-heading","display":"swap"}],"variableName":"spaceGrotesk"} ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /* vietnamese */
 @font-face {
   font-family: '__Space_Grotesk_c22fe1';
@@ -137,6 +137,7 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }@font-face {font-family: '__Space_Grotesk_Fallback_c22fe1';src: local("Arial");ascent-override: 89.71%;descent-override: 26.62%;line-gap-override: 0.00%;size-adjust: 109.69%
 }.__className_c22fe1 {font-family: '__Space_Grotesk_c22fe1', '__Space_Grotesk_Fallback_c22fe1';font-style: normal
+}.__variable_c22fe1 {--font-heading: '__Space_Grotesk_c22fe1', '__Space_Grotesk_Fallback_c22fe1'
 }
 
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
@@ -472,9 +473,6 @@
 .absolute {
   position: absolute;
 }
-.fixed {
-  position: fixed;
-}
 .relative {
   position: relative;
 }
@@ -490,9 +488,6 @@
 .z-10 {
   z-index: 10;
 }
-.z-50 {
-  z-index: 50;
-}
 .container {
   width: 100%;
 }
@@ -504,6 +499,9 @@
 }
 .grid {
   display: grid;
+}
+.hidden {
+  display: none;
 }
 .inline-block {
   display: inline-block;
@@ -529,8 +527,11 @@
 .w-\[900px\] {
   width: 900px;
 }
-.w-full {
-  width: 100%;
+.max-w-full {
+  max-width: 100%;
+}
+.shrink-0 {
+  flex-shrink: 0;
 }
 .flex-grow {
   flex-grow: 1;
@@ -563,6 +564,9 @@
 .overflow-hidden {
   overflow: hidden;
 }
+.overflow-x-auto {
+  overflow-x: auto;
+}
 .rounded-full {
   border-radius: calc(infinity * 1px);
 }
@@ -573,10 +577,6 @@
 .border-t {
   border-top-style: var(--tw-border-style);
   border-top-width: 1px;
-}
-.border-b {
-  border-bottom-style: var(--tw-border-style);
-  border-bottom-width: 1px;
 }
 .border-l {
   border-left-style: var(--tw-border-style);
@@ -610,6 +610,9 @@
   --tw-leading: 0.9;
   line-height: 0.9;
 }
+.break-words {
+  overflow-wrap: break-word;
+}
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -624,6 +627,10 @@
 }
 .opacity-70 {
   opacity: 70%;
+}
+.shadow-\[0_0_16px_rgba\(250\,204\,21\,0\.35\)\] {
+  --tw-shadow: 0 0 16px var(--tw-shadow-color, rgba(250,204,21,0.35));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
 }
 .shadow-\[0_0_22px_rgba\(250\,204\,21\,0\.45\)\] {
   --tw-shadow: 0 0 22px var(--tw-shadow-color, rgba(250,204,21,0.45));
@@ -647,10 +654,6 @@
   transition-timing-function: var(--tw-ease, ease);
   transition-duration: var(--tw-duration, 0s);
 }
-.duration-300 {
-  --tw-duration: 300ms;
-  transition-duration: 300ms;
-}
 :root {
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -662,9 +665,21 @@ html, body {
   color: #e6eef8;
   line-height: 1.7;
   font-family: var(--font-body);
+  overflow-x: hidden;
 }
 body {
   position: relative;
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+  padding-top: constant(safe-area-inset-top);
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 body::before {
   content: "";
@@ -687,6 +702,12 @@ h1, h2, h3, h4 {
 }
 p, li, span, a, button {
   font-family: var(--font-body);
+}
+@media (max-width: 640px) {
+  h1 {
+    white-space: normal !important;
+    word-break: break-word;
+  }
 }
 .container {
   max-width: 1100px;
@@ -751,10 +772,7 @@ button:hover, .button:hover {
   position: absolute;
   width: 480px;
   height: 480px;
-  background: radial-gradient(circle,
-    rgba(250,204,21,0.20),
-    rgba(250,204,21,0.0) 70%
-  );
+  background: radial-gradient(circle, rgba(250,204,21,0.20), rgba(250,204,21,0.0) 70%);
   filter: blur(60px);
   z-index: 0;
   animation: glowPulse 16s ease-in-out infinite;
@@ -788,10 +806,10 @@ button:hover, .button:hover {
 @keyframes floatUp {
   from {
     transform: translateY(20px) scale(1);
-    opacity: 0.35;
+    opacity: .35;
   }
   to {
-    transform: translateY(-100vh) scale(0.4);
+    transform: translateY(-100vh) scale(.4);
     opacity: 0;
   }
 }
@@ -804,6 +822,11 @@ button:hover, .button:hover {
 }
 .bg-accent {
   background-color: var(--accent);
+}
+@media (min-width: 768px) {
+  .page-section {
+    scroll-margin-top: 96px;
+  }
 }
 @property --tw-translate-x {
   syntax: "*";
@@ -1009,10 +1032,6 @@ button:hover, .button:hover {
   syntax: "*";
   inherits: false;
 }
-@property --tw-duration {
-  syntax: "*";
-  inherits: false;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -1062,7 +1081,7 @@ button:hover, .button:hover {
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
-      --tw-duration: initial;
     }
   }
 }
+
