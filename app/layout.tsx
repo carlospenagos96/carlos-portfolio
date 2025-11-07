@@ -2,37 +2,31 @@ import './globals.css'
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { Space_Grotesk, Inter } from 'next/font/google'
 
-import { Inter, Space_Grotesk } from 'next/font/google'
-
-// ✅ Headings (H1, H2, etc.)
-const heading = Space_Grotesk({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-heading',
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 })
 
-// ✅ Body text (paragraphs)
-const body = Inter({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 })
 
 export const metadata = {
   title: 'Carlos Penagos — Logistics & Supply Chain Specialist',
-  description: 'Portfolio website',
+  description:
+    'Logistics and supply chain professional with 7+ years experience in transport coordination, process optimization, and data-driven decision making.',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${heading.variable} ${body.variable} dark`}
-    >
-      <body className="text-white min-h-screen flex flex-col">
+    <html lang="en" className={`${spaceGrotesk.className} ${inter.variable} dark`}>
+      <body className="text-white min-h-screen flex flex-col bg-transparent">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
