@@ -2,83 +2,40 @@ import './globals.css'
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Inter } from 'next/font/google'
 
-// ✅ Load Inter font
-const inter = Inter({
+import { Inter, Space_Grotesk } from 'next/font/google'
+
+// ✅ Headings (H1, H2, etc.)
+const heading = Space_Grotesk({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-heading',
   display: 'swap',
 })
 
-// ✅ Full SEO + OpenGraph Metadata
+// ✅ Body text (paragraphs)
+const body = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
 export const metadata = {
   title: 'Carlos Penagos — Logistics & Supply Chain Specialist',
-  description:
-    'Logistics and supply chain professional with 7+ years experience in transport coordination, process optimization, and data-driven decision making.',
-  keywords: [
-    'Logistics',
-    'Supply Chain',
-    'Transportation',
-    'Freight Forwarding',
-    'CMA CGM',
-    'Excel',
-    'Power BI',
-    'SQL',
-    'Operations',
-    'Process Optimization',
-    'Data Analytics',
-  ],
-  authors: [{ name: 'Carlos Penagos' }],
-  creator: 'Carlos Penagos',
-
-  // ✅ Use your actual Vercel deployment URL
-  metadataBase: new URL('https://carlos-portfolio-loyl.vercel.app'),
-
-  // ✅ OpenGraph (LinkedIn, WhatsApp, Slack previews)
-  openGraph: {
-    title: 'Carlos Penagos — Logistics & Supply Chain Specialist',
-    description:
-      'Experienced logistics professional focused on process improvement, data analytics, and international operations.',
-    url: 'https://carlos-portfolio-loyl.vercel.app',
-    siteName: 'Carlos Penagos Portfolio',
-    images: [
-      {
-        url: '/og-image.png', // ✅ stored in public/
-        width: 1200,
-        height: 630,
-        alt: 'Carlos Penagos — Logistics Portfolio',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-
-  // ✅ Twitter card metadata
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Carlos Penagos — Logistics Specialist',
-    description:
-      'Logistics & Supply Chain portfolio showcasing experience, skills, and achievements.',
-    images: ['/og-image.png'],
-  },
+  description: 'Portfolio website',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.className} dark`}>
-      <body className="bg-black text-white min-h-screen flex flex-col">
-
-        {/* ✅ Sticky Navigation Bar */}
+    <html
+      lang="en"
+      className={`${heading.variable} ${body.variable} dark`}
+    >
+      <body className="text-white min-h-screen flex flex-col">
         <Header />
-
-        {/* ✅ Main page content */}
-        <main className="container py-10 flex-grow">
-          {children}
-        </main>
-
-        {/* ✅ Footer */}
+        <main className="flex-grow">{children}</main>
         <Footer />
-
       </body>
     </html>
   )

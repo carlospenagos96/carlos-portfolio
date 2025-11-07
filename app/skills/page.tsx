@@ -3,7 +3,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import PageTransition from '../../components/PageTransition'
 
-// ✅ Your structured skills data
+// ✅ Skills data (languages removed)
 const skills = {
   logistics: [
     "Logistics Operations",
@@ -32,21 +32,13 @@ const skills = {
     "Decision Making",
     "Adaptability",
   ],
-  languages: [
-    "Spanish (Native)",
-    "English (Fluent)",
-    "Catalan (Fluent)",
-    "French (Basic)",
-    "Finnish (Basic)",
-  ],
 }
 
-// ✅ Skill groups with labels
+// ✅ Skill groups (languages removed)
 const skillGroups = [
   { title: "Logistics & Operations", items: skills.logistics },
   { title: "Data & Analytical Tools", items: skills.analytics },
   { title: "Soft Skills", items: skills.soft },
-  { title: "Languages", items: skills.languages },
 ]
 
 export default function Skills() {
@@ -71,7 +63,7 @@ export default function Skills() {
               key={idx} 
               title={group.title} 
               items={group.items} 
-              delay={idx * 0.12} 
+              delay={idx * 0.12}
             />
           ))}
         </div>

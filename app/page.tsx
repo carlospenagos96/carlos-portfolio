@@ -1,114 +1,98 @@
 'use client'
-import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 export default function Home() {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-  const [centerOffset, setCenterOffset] = useState({ x: 0, y: 0 })
-
-  // ✅ Track mouse position on the client only
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
-  // ✅ Calculate screen center offset (NOW it's safe because we are in useEffect)
-  useEffect(() => {
-    setCenterOffset({
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-    })
-  }, [])
-
   return (
-    <section className="relative py-24 text-center overflow-hidden">
-      {/* === Floating Glow Behind Hero === */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        animate={{
-          x: (position.x - centerOffset.x) / 20,
-          y: (position.y - centerOffset.y) / 20,
-        }}
-        transition={{ type: 'spring', stiffness: 50, damping: 20 }}
-      >
-        <motion.div
-          className="w-[450px] h-[450px] bg-cyan-500/40 rounded-full blur-[120px] mx-auto"
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.25, 0.35, 0.25],
-            rotate: [0, 8, -8, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </motion.div>
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-32">
 
-      {/* === HERO CONTENT === */}
-      <div className="relative z-10">
+      {/* ✅ Left premium accent bar */}
+      <div className="absolute left-8 top-1/2 -translate-y-1/2 h-[70%] w-[2px] bg-gradient-to-b from-transparent via-yellow-300/60 to-transparent opacity-70" />
+
+      {/* ✅ Medium-motion glow */}
+      <motion.div
+        className="absolute left-1/2 top-1/2 w-[900px] h-[900px] rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(250,204,21,0.25), transparent 70%)",
+          filter: "blur(160px)",
+          transform: "translate(-50%, -50%)",
+        }}
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.35, 0.5, 0.35],
+          x: [-25, 25, -25],
+          y: [-15, 15, -15],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* ✅ HERO CONTENT */}
+      <div className="container mx-auto px-6 relative z-10">
+
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-5xl font-bold tracking-tight"
+          transition={{ duration: 0.8 }}
+          className="text-[5rem] font-semibold leading-[0.9] tracking-tight whitespace-nowrap"
         >
           Carlos Penagos
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-accent text-lg mt-3"
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.8 }}
+          className="text-[2.5rem] mt-8 text-yellow-300 font-medium"
         >
           Logistics & Supply Chain Specialist
-        </motion.p>
+        </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="mt-6 max-w-2xl text-gray-300 mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45, duration: 1 }}
+          className="mt-10 text-gray-200 text-2xl max-w-3xl leading-relaxed"
         >
-          Proactive logistics professional with 7+ years of international experience. 
-          I combine operations knowledge with data skills (<span className="text-accent">Power BI</span>, <span className="text-accent">SQL</span>, <span className="text-accent">Python</span>) 
-          to optimize processes and reduce costs.
+          Data-driven logistics professional with 7+ years of international experience.  
+          Skilled in <span className="text-yellow-300 font-semibold">Power BI</span>,  
+          <span className="text-yellow-300 font-semibold"> SQL</span>,  
+          and <span className="text-yellow-300 font-semibold"> Python</span>.
         </motion.p>
 
-        {/* === Buttons === */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="mt-8 flex justify-center gap-4 flex-wrap"
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 1 }}
+          className="mt-16 flex gap-8 flex-wrap"
         >
           <a
             href="mailto:cpenagosguzman@outlook.com"
-            className="px-5 py-2 border border-white/10 rounded-lg hover:bg-white/10 transition-all"
+            className="px-10 py-5 rounded-full border border-white/30 hover:bg-white/10 backdrop-blur-lg transition-all text-xl"
           >
             Email
           </a>
+
           <a
             href="https://www.linkedin.com/in/cpenagosguzman/"
             target="_blank"
             rel="noreferrer"
-            className="px-5 py-2 border border-white/10 rounded-lg hover:bg-white/10 transition-all"
+            className="px-10 py-5 rounded-full border border-white/30 hover:bg-white/10 backdrop-blur-lg transition-all text-xl"
           >
             LinkedIn
           </a>
+
           <a
             href="/Carlos_Penagos_CV.pdf"
             download
-            className="px-5 py-2 border border-white/10 rounded-lg hover:bg-white/10 transition-all"
+            className="px-10 py-5 rounded-full border border-white/30 hover:bg-white/10 backdrop-blur-lg transition-all text-xl"
           >
             Download CV
           </a>
         </motion.div>
+
       </div>
     </section>
   )

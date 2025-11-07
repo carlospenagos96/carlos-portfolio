@@ -1,0 +1,19 @@
+<svg width="420" height="820" viewBox="0 0 420 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="glow" x1="0" y1="0" x2="420" y2="820">
+      <stop offset="0%" stop-color="#facc15" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#facc15" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="420" height="820" fill="url(#glow)" opacity="0.18"/>
+
+  <!-- mesh -->
+  <path d="M10 0 L400 800" stroke="#facc15" stroke-opacity="0.06" stroke-width="1"/>
+  <path d="M100 0 L420 700" stroke="#facc15" stroke-opacity="0.06" stroke-width="1"/>
+  <path d="M0 200 L420 900" stroke="#facc15" stroke-opacity="0.06" stroke-width="1"/>
+
+  <!-- curved signal lines -->
+  <path d="M20 100 C150 200 250 50 400 300" stroke="#facc15" stroke-opacity="0.10" stroke-width="1.8" />
+  <path d="M10 250 C180 350 280 180 420 420" stroke="#facc15" stroke-opacity="0.10" stroke-width="1.8" />
+</svg>
